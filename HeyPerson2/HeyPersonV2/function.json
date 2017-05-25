@@ -1,0 +1,22 @@
+﻿{
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "methods": [
+        "get",
+        "post"
+      ],
+      "authLevel": "function",
+      "direction": "in",
+      "name": "req"
+    },
+    {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "..\\bin\\HeyPerson2.dll",
+  "entryPoint": "HeyPerson2.HeyPersonV2.Run"
+}
