@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using System.IO;
+using SpotlightApiClient;
+using System;
 
 namespace HeyPerson
 {
@@ -25,6 +28,20 @@ namespace HeyPerson
 
             // Set name to query string or body data
             name = name ?? data?.name;
+
+            try
+            {
+                name += " calling nuget";
+                SpotlightApiClientLightWeight client = new SpotlightApiClientLightWeight();
+                var status = client.GetStatus(new Guid(), new Guid());
+                name += " nuget work " + status.ToString();
+
+            }
+            catch(Exception ex)
+            {
+                name += " nuget is working";
+            }
+
 
             return name == null
                 ? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
